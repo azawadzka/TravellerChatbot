@@ -1,0 +1,1 @@
+Put asset files in this directory.
