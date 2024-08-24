@@ -1,20 +1,15 @@
 import os
 
-from app.client import Client
-from app.conversation import Conversation
-from app.data_sources import DataSources
-from app.destination_retriever import DestinationRetriever
-from app.retriever import SimilaritySearchRetriever
+from src.app.client import Client
+from src.app.conversation import Conversation
+from src.app.data_sources import DataSources
+from src.app.destination_retriever import DestinationRetriever
+from src.app.retriever import SimilaritySearchRetriever
 
 os.environ["TOKENIZERS_PARALLELISM"] = "false"  # huggingface/tokenizers warning for SimilaritySearchRetriever
 
 
 client = Client()
-
-
-def get_client() -> Client:
-    return client
-
 
 destination_retriever = DestinationRetriever(client)
 
@@ -28,6 +23,10 @@ conversation = Conversation(
     retriever=retriever,
     data=data
 )
+
+
+def get_client() -> Client:
+    return client
 
 
 def get_conversation() -> Conversation:

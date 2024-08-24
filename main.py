@@ -1,6 +1,6 @@
 import streamlit as st
 
-from app.deps import get_conversation
+from src.app.deps import get_conversation
 
 welcome_message = {"role": "assistant", "content": "Hello, I'm a travel assistant. Ask me about your dream destination."}
 

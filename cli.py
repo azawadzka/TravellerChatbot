@@ -1,7 +1,7 @@
 from prompt_toolkit import PromptSession
 from prompt_toolkit.history import FileHistory
 
-from app.deps import get_conversation
+from src.app.deps import get_conversation
 
 
 if __name__ == '__main__':

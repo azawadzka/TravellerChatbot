@@ -1,12 +1,8 @@
 import json
 from typing import List
 
-from app.client import Client
-
-prompt = """
-Return JSON having one field "destination" containing name of the last travel destination that the user asked about in the context. If you don't know, fill the field with the word "unknown".
-Context: {context}
-"""
+from src.app.client import Client
+from src.const import DESTINATION_PROMPT
 
 
 class DestinationRetriever:
@@ -18,7 +14,7 @@ class DestinationRetriever:
 
     def retrieve(self, messages: List[dict]) -> str:
         context = self._format_context(self._select_messages(messages))
-        request = [{"role": "system", "content": prompt.format(context=context)}]
+        request = [{"role": "system", "content": DESTINATION_PROMPT.format(context=context)}]
         json_str_response = self.client.chat(request)
         return self._parse_response(json_str_response)
 

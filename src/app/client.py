@@ -10,7 +10,7 @@ load_dotenv()
 class Client:
     TOKENS_LIMIT = 4096
     MAX_RESPONSE_TOKENS = 800
-    MODEL = "gpt-35-turbo"
+    MODEL = "gpt-3.5-turbo"
 
     def __init__(self):
         self.client = OpenAI(
@@ -19,7 +19,7 @@ class Client:
 
     def chat(self, conversation) -> str:
         response = self.client.chat.completions.create(
-            model=os.getenv("MODEL", None),
+            model=Client.MODEL,
             messages=conversation,
             temperature=0.7,
             max_tokens=self.MAX_RESPONSE_TOKENS,

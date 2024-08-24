@@ -1,24 +1,12 @@
-from app.client import Client
-from app.data_sources import DataSources
-from app.destination_retriever import DestinationRetriever
-from app.retriever import Retriever
-
-prompt = """
-You are an AI assistant that helps people answer questions travel destinations in Portugal based on information given in the context.
-Instructions:
-- Only answer questions related to traveling to Portugal.
-- Only use information given in the context.
-- If you're unsure of an answer, you can say "I don't know" or "I'm not sure" and ask if you can help this with information about traveling to Portugal.
-- If the context is "unknown", ask the user if they would like to ask about any specific place.
-- If the context is "not in database", tell the user that you don't have information about this place.
-
-Context:
-{context}
-"""
+from src.app.client import Client
+from src.app.data_sources import DataSources
+from src.app.destination_retriever import DestinationRetriever
+from src.app.retriever import Retriever
+from src.const import CHAT_PROMPT
 
 
 class Conversation:
-    SYSTEM_MESSAGES = [{"role": "system", "content": prompt}]
+    SYSTEM_MESSAGES = [{"role": "system", "content": CHAT_PROMPT}]
 
     def __init__(
             self,
@@ -58,7 +46,7 @@ class Conversation:
                 vector_store=self.data[self.current_destination],
                 query=self.messages[-1]["content"]
             )
-        self.messages[0]["content"] = prompt.format(context=data)
+        self.messages[0]["content"] = CHAT_PROMPT.format(context=data)
 
     def _remove_overflowing_msgs(self) -> None:
         while self.client.get_tokens_count(self.messages) + self.client.MAX_RESPONSE_TOKENS >= self.client.TOKENS_LIMIT:
