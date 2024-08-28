@@ -1,5 +1,4 @@
 import json
-from typing import List
 
 from src.app.client import Client
 from src.const import DESTINATION_PROMPT
@@ -12,14 +11,14 @@ class DestinationRetriever:
     def __init__(self, client: Client):
         self.client = client
 
-    def retrieve(self, messages: List[dict]) -> str:
+    def retrieve(self, messages: list[dict]) -> str:
         context = self._format_context(self._select_messages(messages))
         request = [{"role": "system", "content": DESTINATION_PROMPT.format(context=context)}]
         json_str_response = self.client.chat(request)
         return self._parse_response(json_str_response)
 
     @staticmethod
-    def _select_messages(messages: List[dict]) -> List[dict]:
+    def _select_messages(messages: list[dict]) -> list[dict]:
         """
         Select n=ProductRetriever.N_MESSAGES latest messages that are either user or assistant, not system.
         This should help to build sufficient context for retrieval.
@@ -27,7 +26,7 @@ class DestinationRetriever:
         return [msg for msg in messages if msg["role"] in ["user", "assistant"]][-DestinationRetriever.N_MESSAGES:]
 
     @staticmethod
-    def _format_context(messages: List[dict]) -> str:
+    def _format_context(messages: list[dict]) -> str:
         return "\n".join(f"{msg['role']}: {msg['content']}" for msg in messages)
 
     @staticmethod

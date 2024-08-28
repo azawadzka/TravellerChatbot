@@ -1,6 +1,6 @@
 import os
 from pathlib import Path
-from typing import Optional, List
+from typing import Optional
 
 from langchain.docstore.document import Document
 from langchain.text_splitter import RecursiveCharacterTextSplitter
@@ -39,7 +39,7 @@ class DataSources:
         return data
 
     @staticmethod
-    def _make_vectorstore(documents: List[Document]):
+    def _make_vectorstore(documents: list[Document]):
         splits = DataSources.text_splitter.split_documents(documents)
         return Chroma.from_documents(splits, DataSources.embedding_function)
 
