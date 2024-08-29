@@ -13,7 +13,7 @@ from langchain_community.embeddings.sentence_transformer import SentenceTransfor
 class DataSources:
     data_path = Path("./data")
     text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=200)
-    embedding_function = SentenceTransformerEmbeddings(model_name="all-MiniLM-L6-v2")
+    embedding_function = SentenceTransformerEmbeddings(model_name="all-MiniLM-L6-v2", cache_folder="models")
 
     def __init__(self, path: Optional[str] = None):
         self.data = self._load_data(path or self.data_path)

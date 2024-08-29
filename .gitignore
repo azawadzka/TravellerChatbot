@@ -1,7 +1,9 @@
-venv/
-
 data/*
 !data/_README.md
+
+models/
+
+venv/
 
 /.cli-history
 /.env
