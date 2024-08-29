@@ -1,11 +1,10 @@
 data/*
 !data/_README.md
-
 models/
-
+secrets/
 venv/
 
-/.cli-history
-/.env
+.cli-history
+.python-version
 
 *.ipynb

@@ -4,6 +4,16 @@
 # For more help, visit the .dockerignore file reference guide at
 # https://docs.docker.com/go/build-context-dockerignore/
 
+# project-specific
+secrets/
+.cli-history
+.python-version
+compose.yaml
+Dockerfile
+Makefile
+README.Docker.md
+
+# generic
 **/.DS_Store
 **/__pycache__
 **/.venv

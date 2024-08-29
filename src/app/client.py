@@ -1,10 +1,7 @@
-import os
-
 import tiktoken
-from dotenv import load_dotenv
 from openai import OpenAI
 
-load_dotenv()
+from src.app.helpers import get_secret
 
 
 class Client:
@@ -14,7 +11,7 @@ class Client:
 
     def __init__(self):
         self.client = OpenAI(
-            api_key=os.environ.get("OPENAI_API_KEY", None)
+            api_key=get_secret("OPENAI_API_KEY")
         )
 
     def chat(self, conversation) -> str:

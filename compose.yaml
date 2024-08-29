@@ -2,5 +2,11 @@ services:
   server:
     build:
       context: .
+    secrets:
+      - OPENAI_API_KEY
     ports:
       - 8501:8501
+
+secrets:
+  OPENAI_API_KEY:
+    file: ./secrets/OPENAI_API_KEY
